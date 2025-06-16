@@ -1,4 +1,4 @@
-# KIWIQASS - AI Workflow Assistant
+# KIWIQASS - AI Workflow Assistant ([Screencast from 2025-06-17 01-03-42.webm](https://github.com/user-attachments/assets/c1b1fb66-23fa-475b-bfa3-dc01afc2422c))
 
 A Human-in-the-Loop (HITL) interface for an AI teammate product that helps users create and manage workflows through natural language interaction.
 
