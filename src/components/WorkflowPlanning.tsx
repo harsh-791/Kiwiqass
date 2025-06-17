@@ -42,10 +42,10 @@ export function WorkflowPlanning() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 p-4 sm:p-2">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 mb-6 shadow-lg border border-gray-700">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 sm:p-3 mb-6 shadow-lg border border-gray-700">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2 sm:gap-0">
             <div>
               <h1 className="text-2xl font-bold text-white">Workflow Plan</h1>
               <p className="text-gray-300 mt-1">Goal: {currentPlan.goal}</p>
@@ -89,20 +89,20 @@ export function WorkflowPlanning() {
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4">
           <button
             onClick={handleAddStep}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-200 rounded-lg hover:bg-gray-600 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-200 rounded-lg hover:bg-gray-600 transition-colors w-full sm:w-auto"
           >
             <Plus className="w-4 h-4" />
             Add Step
           </button>
 
-          <div className="flex-1" />
+          <div className="flex-1 hidden sm:block" />
 
           <button
             onClick={() => setAppState("input")}
-            className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-gray-200 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-gray-200 transition-colors w-full sm:w-auto"
           >
             <RotateCcw className="w-4 h-4" />
             Start Over
@@ -110,7 +110,7 @@ export function WorkflowPlanning() {
 
           <button
             onClick={handleProceedToReview}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg shadow-blue-500/25"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg shadow-blue-500/25 w-full sm:w-auto"
           >
             Review Plan
             <ArrowRight className="w-4 h-4" />

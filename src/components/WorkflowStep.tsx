@@ -84,9 +84,9 @@ export function WorkflowStep({
   };
 
   return (
-    <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-xl hover:border-gray-600 transition-all duration-200">
-      <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 flex items-center gap-2">
+    <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6 sm:p-3 shadow-lg hover:shadow-xl hover:border-gray-600 transition-all duration-200">
+      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-4">
+        <div className="flex-shrink-0 flex items-center gap-2 mb-2 sm:mb-0">
           <div
             {...dragHandleProps}
             className="cursor-grab p-1.5 hover:bg-gray-700/50 rounded-lg transition-colors"
@@ -203,7 +203,7 @@ export function WorkflowStep({
           )}
 
           {!isEditing && (
-            <div className="flex items-center gap-2 pt-2 border-t border-gray-700">
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 pt-2 border-t border-gray-700">
               <button
                 onClick={() => setIsEditing(true)}
                 className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
@@ -239,7 +239,7 @@ export function WorkflowStep({
 
               <button
                 onClick={() => deleteStep(step.id)}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors ml-auto"
+                className="flex items-center gap-1 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors ml-auto sm:ml-auto"
               >
                 <Trash2 className="w-4 h-4" />
                 Delete
@@ -259,7 +259,7 @@ export function WorkflowStep({
                 className="w-full px-3 py-2 border border-purple-500/30 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm"
                 rows={2}
               />
-              <div className="flex gap-2 mt-3">
+              <div className="flex flex-col sm:flex-row gap-2 mt-3">
                 <button
                   onClick={handleRevise}
                   disabled={!revisionInstruction.trim() || isRevising}
