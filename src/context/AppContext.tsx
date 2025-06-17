@@ -84,10 +84,15 @@ function appReducer(state: AppContext, action: Action): AppContext {
       return { ...state, error: action.payload };
 
     case "SET_PLAN":
+      const fixedPlan = {
+        ...action.payload,
+        createdAt: new Date(action.payload.createdAt),
+        updatedAt: new Date(action.payload.updatedAt),
+      };
       return {
         ...state,
-        currentPlan: action.payload,
-        ...saveToHistory(action.payload),
+        currentPlan: fixedPlan,
+        ...saveToHistory(fixedPlan),
       };
 
     case "UPDATE_STEP":
@@ -206,8 +211,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       dispatch({ type: "SET_LOADING", payload: loading }),
     setError: (error: string | null) =>
       dispatch({ type: "SET_ERROR", payload: error }),
-    setPlan: (plan: WorkflowPlan) =>
-      dispatch({ type: "SET_PLAN", payload: plan }),
+    setPlan: (plan: WorkflowPlan) => {
+      const fixedPlan = {
+        ...plan,
+        createdAt: new Date(plan.createdAt),
+        updatedAt: new Date(plan.updatedAt),
+      };
+      dispatch({ type: "SET_PLAN", payload: fixedPlan });
+    },
     updateStep: (stepId: string, updates: Partial<WorkflowStep>) =>
       dispatch({ type: "UPDATE_STEP", payload: { stepId, updates } }),
     deleteStep: (stepId: string) =>

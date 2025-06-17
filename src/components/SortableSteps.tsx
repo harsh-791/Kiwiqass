@@ -2,9 +2,11 @@ import {
   DndContext,
   closestCenter,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
   DragEndEvent,
+  DragStartEvent,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -15,6 +17,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { WorkflowStep } from "../types";
 import { WorkflowStep as WorkflowStepComponent } from "./WorkflowStep";
+import { GripVertical } from "lucide-react";
 
 interface SortableStepProps {
   step: WorkflowStep;
@@ -48,16 +51,21 @@ const SortableStep = ({
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : 1,
+    touchAction: "none",
   };
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={setNodeRef} style={style} className="touch-none">
       <WorkflowStepComponent
         step={step}
         isFirst={isFirst}
         isLast={isLast}
         totalSteps={totalSteps}
-        dragHandleProps={{ ...attributes, ...listeners }}
+        dragHandleProps={{
+          ...attributes,
+          ...listeners,
+          className: "cursor-grab active:cursor-grabbing touch-none",
+        }}
       />
     </div>
   );
@@ -83,8 +91,20 @@ const SortableSteps = ({
       activationConstraint: {
         distance: 8,
       },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 8,
+      },
     })
   );
+
+  const handleDragStart = (event: DragStartEvent) => {
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(50);
+    }
+  };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -101,6 +121,10 @@ const SortableSteps = ({
       );
 
       onReorder(newSteps);
+
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(100);
+      }
     }
   };
 
@@ -108,6 +132,7 @@ const SortableSteps = ({
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       <SortableContext
